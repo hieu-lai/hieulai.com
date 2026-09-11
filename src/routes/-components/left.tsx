@@ -8,7 +8,7 @@ import {
 
 export function Left() {
   return (
-    <div className="sticky top-0 flex h-dvh flex-1 flex-col justify-between py-20">
+    <div className="sticky top-0 flex h-dvh flex-1 shrink-0 flex-col justify-between py-20">
       <div className="space-y-4">
         <h1 className="text-4xl font-bold">Hieu Lai</h1>
         <p className="text-lg font-medium">
