@@ -1,14 +1,24 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { createServerFn } from '@tanstack/react-start'
+import { renderServerComponent } from '@tanstack/react-start/rsc'
 
-export const Route = createFileRoute('/')({ component: Home })
+import { Home } from './-components/home'
 
-function Home() {
-  return (
-    <div className="p-8">
-      <h1 className="text-4xl font-bold">Welcome to TanStack Start</h1>
-      <p className="mt-4 text-lg">
-        Edit <code>src/routes/index.tsx</code> to get started.
-      </p>
-    </div>
-  )
+const getRscHome = createServerFn().handler(async () => {
+  const RscHome = await renderServerComponent(<Home />)
+  return { RscHome }
+})
+
+export const Route = createFileRoute('/')({
+  loader: async () => {
+    const { RscHome } = await getRscHome()
+    return { RscHome }
+  },
+  component: RootComponent,
+})
+
+function RootComponent() {
+  const { RscHome } = Route.useLoaderData()
+
+  return RscHome
 }

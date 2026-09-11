@@ -1,24 +1,9 @@
-
-@import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
-@import "@fontsource-variable/geist";
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+@import '@fontsource-variable/geist';
 
 @custom-variant dark (&:is(.dark *));
-
-* {
-  box-sizing: border-box;
-}
-
-html,
-body,
-#app {
-  min-height: 100%;
-}
-
-body {
-  margin: 0;
-}
 
 @theme inline {
   --font-heading: var(--font-sans);
@@ -139,10 +124,20 @@ body {
   body {
     @apply bg-background text-foreground;
   }
-  button:not(:disabled), [role="button"]:not(:disabled) {
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
     cursor: pointer;
   }
   html {
     @apply font-sans;
+  }
+  .dev {
+    @apply border border-red-400;
+  }
+  .dev2 {
+    @apply border border-yellow-400;
+  }
+  .dev3 {
+    @apply border border-green-400;
   }
 }
