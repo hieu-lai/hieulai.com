@@ -3,6 +3,8 @@
 import { cn } from '@/lib/utils'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 
+type Ripple = { id: number; row: number; col: number }
+
 export const BackgroundRippleEffect = ({
   rows = 10,
   cols = 27,
@@ -12,11 +14,8 @@ export const BackgroundRippleEffect = ({
   cols?: number
   cellSize?: number
 }) => {
-  const [clickedCell, setClickedCell] = useState<{
-    row: number
-    col: number
-  } | null>(null)
-  const [rippleKey, setRippleKey] = useState(0)
+  const [ripples, setRipples] = useState<Ripple[]>([])
+  const nextRippleId = useRef(0)
   const ref = useRef<HTMLDivElement>(null)
   const [containerWidth, setContainerWidth] = useState(0)
   const responsiveCols = Math.max(cols, Math.ceil(containerWidth / cellSize))
@@ -45,17 +44,19 @@ export const BackgroundRippleEffect = ({
       <div className="relative h-auto w-auto overflow-hidden [mask-image:linear-gradient(to_bottom,black_50%,transparent_100%)]">
         <div className="pointer-events-none absolute inset-0 z-2 h-full w-full overflow-hidden" />
         <DivGrid
-          key={`base-${rippleKey}`}
           className="mask-radial-from-20% mask-radial-at-top opacity-600"
           rows={rows}
           cols={responsiveCols}
           cellSize={cellSize}
           borderColor="var(--cell-border-color)"
           fillColor="var(--cell-fill-color)"
-          clickedCell={clickedCell}
+          ripples={ripples}
+          onRippleComplete={(id) => {
+            setRipples((active) => active.filter((ripple) => ripple.id !== id))
+          }}
           onCellClick={(row, col) => {
-            setClickedCell({ row, col })
-            setRippleKey((k) => k + 1)
+            const ripple = { id: nextRippleId.current++, row, col }
+            setRipples((active) => [...active, ripple])
           }}
           interactive
         />
@@ -71,7 +72,8 @@ type DivGridProps = {
   cellSize: number // in pixels
   borderColor: string
   fillColor: string
-  clickedCell: { row: number; col: number } | null
+  ripples: Ripple[]
+  onRippleComplete: (id: number) => void
   onCellClick?: (row: number, col: number) => void
   interactive?: boolean
 }
@@ -89,7 +91,8 @@ const DivGrid = ({
   cellSize = 56,
   borderColor = '#3f3f46',
   fillColor = 'rgba(14,165,233,0.3)',
-  clickedCell = null,
+  ripples,
+  onRippleComplete,
   onCellClick = () => {},
   interactive = true,
 }: DivGridProps) => {
@@ -112,38 +115,50 @@ const DivGrid = ({
       {cells.map((idx) => {
         const rowIdx = Math.floor(idx / cols)
         const colIdx = idx % cols
-        const distance = clickedCell
-          ? Math.hypot(clickedCell.row - rowIdx, clickedCell.col - colIdx)
-          : 0
-        const delay = clickedCell ? Math.max(0, distance * 55) : 0 // ms
-        const duration = 200 + distance * 80 // ms
-
-        const style: CellStyle = clickedCell
-          ? {
-              '--delay': `${delay}ms`,
-              '--duration': `${duration}ms`,
-              // Shift gently through the rainbow as the wave expands.
-              '--ripple-color': `oklch(0.75 0.12 ${(distance * 28) % 360})`,
-            }
-          : {}
 
         return (
           <div
             key={idx}
             className={cn(
               'cell relative border-[0.5px] opacity-40 transition-opacity duration-150 will-change-transform hover:opacity-80 dark:shadow-[0px_0px_40px_1px_var(--cell-shadow-color)_inset]',
-              clickedCell && 'animate-cell-ripple [animation-fill-mode:none]',
               !interactive && 'pointer-events-none',
             )}
             style={{
               backgroundColor: fillColor,
               borderColor: borderColor,
-              ...style,
             }}
             onClick={
               interactive ? () => onCellClick(rowIdx, colIdx) : undefined
             }
-          />
+          >
+            {ripples.map((ripple) => {
+              const distance = Math.hypot(
+                ripple.row - rowIdx,
+                ripple.col - colIdx,
+              )
+              const lastRow = ripple.row < (rows - 1) / 2 ? rows - 1 : 0
+              const lastCol = ripple.col < (cols - 1) / 2 ? cols - 1 : 0
+              const style: CellStyle = {
+                '--delay': `${distance * 55}ms`,
+                '--duration': `${200 + distance * 80}ms`,
+                '--ripple-color': `oklch(0.75 0.18 ${(distance * 28) % 360})`,
+              }
+
+              return (
+                <span
+                  key={ripple.id}
+                  aria-hidden="true"
+                  className="animate-cell-ripple pointer-events-none absolute -inset-px border-[0.5px] border-transparent opacity-0 [animation-fill-mode:none]"
+                  style={style}
+                  onAnimationEnd={
+                    rowIdx === lastRow && colIdx === lastCol
+                      ? () => onRippleComplete(ripple.id)
+                      : undefined
+                  }
+                />
+              )
+            })}
+          </div>
         )
       })}
     </div>

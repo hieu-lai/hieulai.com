@@ -55,9 +55,9 @@
       border-color: var(--cell-border-color);
     }
     50% {
-      opacity: 0.8;
-      background-color: color-mix(in oklab, var(--ripple-color) 18%, var(--cell-fill-color));
-      border-color: color-mix(in oklab, var(--ripple-color) 30%, var(--cell-border-color));
+      opacity: 1;
+      background-color: color-mix(in oklab, var(--ripple-color) 45%, var(--cell-fill-color));
+      border-color: color-mix(in oklab, var(--ripple-color) 65%, var(--cell-border-color));
     }
     100% {
       opacity: 0.4;
