@@ -1,5 +1,4 @@
 import { Badge } from '#/components/ui/badge'
-import { getImageUrl } from '#/lib/get-image-url'
 import { ExternalLinkIcon } from 'lucide-react'
 
 type Props = {
@@ -14,7 +13,8 @@ export function Item({ description, tech, title, imageKey, link }: Props) {
   return (
     <a className="flex gap-10" href={link} target="_blank">
       <img
-        src={getImageUrl(imageKey)}
+        src={`/images/${imageKey}`}
+        alt={`${title} preview`}
         className="aspect-video w-32 self-start rounded-lg border"
       />
       <div className="-mt-0.75 flex flex-col gap-2">

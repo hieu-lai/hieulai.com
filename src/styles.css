@@ -46,6 +46,25 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  
+  --animate-cell-ripple: cell-ripple var(--duration, 200ms) ease-out none 1 var(--delay, 0ms);
+  @keyframes cell-ripple {
+    0% {
+      opacity: 0.4;
+      background-color: var(--cell-fill-color);
+      border-color: var(--cell-border-color);
+    }
+    50% {
+      opacity: 0.8;
+      background-color: color-mix(in oklab, var(--ripple-color) 18%, var(--cell-fill-color));
+      border-color: color-mix(in oklab, var(--ripple-color) 30%, var(--cell-border-color));
+    }
+    100% {
+      opacity: 0.4;
+      background-color: var(--cell-fill-color);
+      border-color: var(--cell-border-color);
+    }
+  }
 }
 
 :root {

@@ -1,6 +1,5 @@
-import { TanStackDevtools } from '@tanstack/react-devtools'
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
-import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
+import { ThemeProvider } from '#/components/theme-provider'
 import { TooltipProvider } from '#/components/ui/tooltip'
 
 import appCss from '../styles.css?url'
@@ -16,7 +15,7 @@ export const Route = createRootRoute({
         content: 'width=device-width, initial-scale=1',
       },
       {
-        title: 'TanStack Start Starter',
+        title: 'Hieu Lai',
       },
     ],
     links: [
@@ -31,12 +30,14 @@ export const Route = createRootRoute({
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
       <body>
-        <TooltipProvider>{children}</TooltipProvider>
+        <ThemeProvider defaultTheme="dark" storageKey="theme">
+          <TooltipProvider>{children}</TooltipProvider>
+        </ThemeProvider>
         <Scripts />
       </body>
     </html>

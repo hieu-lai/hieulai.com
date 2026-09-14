@@ -5,7 +5,7 @@ import { Projects } from './projects'
 
 export function Right() {
   return (
-    <div className="flex-1">
+    <div className="pointer-events-none relative z-10 flex-1 [&_a]:pointer-events-auto">
       <div className="space-y-32 py-20">
         <About />
         <Experience />

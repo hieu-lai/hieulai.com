@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { createServerFn } from '@tanstack/react-start'
 import { renderServerComponent } from '@tanstack/react-start/rsc'
+import { BackgroundRippleEffect } from '#/components/ui/background-ripple-effect'
 
 import { Home } from './-components/home'
 
@@ -20,5 +21,10 @@ export const Route = createFileRoute('/')({
 function RootComponent() {
   const { RscHome } = Route.useLoaderData()
 
-  return RscHome
+  return (
+    <>
+      <BackgroundRippleEffect />
+      {RscHome}
+    </>
+  )
 }

@@ -1,5 +1,6 @@
 import GithubIcon from '#/components/icons/github'
 import LinkedInIcon from '#/components/icons/linkedin'
+import { ModeToggle } from '#/components/mode-toggle'
 import {
   Tooltip,
   TooltipContent,
@@ -8,9 +9,12 @@ import {
 
 export function Left() {
   return (
-    <div className="sticky top-0 flex h-dvh flex-1 shrink-0 flex-col justify-between py-20">
+    <div className="pointer-events-none sticky top-0 z-10 flex h-dvh flex-1 shrink-0 flex-col justify-between py-20">
       <div className="space-y-4">
-        <h1 className="text-4xl font-bold">Hieu Lai</h1>
+        <div className="flex items-center justify-between pr-20">
+          <h1 className="text-4xl font-bold">Hieu Lai</h1>
+          <ModeToggle />
+        </div>
         <p className="text-lg font-medium">
           Full-Stack Developer{' '}
           <span className="text-muted-foreground text-sm font-normal">
@@ -26,7 +30,11 @@ export function Left() {
         <Tooltip>
           <TooltipTrigger
             render={
-              <a href="https://github.com/hieu-lai" target="_blank">
+              <a
+                className="pointer-events-auto"
+                href="https://github.com/hieu-lai"
+                target="_blank"
+              >
                 <GithubIcon />
               </a>
             }
@@ -36,7 +44,11 @@ export function Left() {
         <Tooltip>
           <TooltipTrigger
             render={
-              <a href="https://linkedin.com/in/hieulai/" target="_blank">
+              <a
+                className="pointer-events-auto"
+                href="https://linkedin.com/in/hieulai/"
+                target="_blank"
+              >
                 <LinkedInIcon />
               </a>
             }
