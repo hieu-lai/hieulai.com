@@ -11,7 +11,7 @@ type Props = {
 export function Item({ description, period, tech, title, company }: Props) {
   return (
     <div className="flex gap-10">
-      <p className="text-muted-foreground shrink-0 text-sm">{period}</p>
+      <p className="text-muted-foreground w-32 shrink-0 text-sm">{period}</p>
       <div className="-mt-0.75 flex flex-col gap-2">
         <h1 className="text-lg font-medium">
           {title} • {company}
@@ -19,7 +19,7 @@ export function Item({ description, period, tech, title, company }: Props) {
         <p className="text-muted-foreground text-sm">{description}</p>
         <div className="flex flex-wrap gap-2">
           {tech.map((item) => (
-            <Badge>{item}</Badge>
+            <Badge key={item}>{item}</Badge>
           ))}
         </div>
       </div>

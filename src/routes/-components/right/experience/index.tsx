@@ -1,3 +1,6 @@
+import { buttonVariants } from '#/components/ui/button'
+import { ExternalLinkIcon } from 'lucide-react'
+
 import { Item } from './item'
 
 const EXPEREINCE = [
@@ -38,9 +41,17 @@ const EXPEREINCE = [
 export function Experience() {
   return (
     <div className="space-y-10">
-      {EXPEREINCE.map((exp) => (
-        <Item {...exp} />
+      {EXPEREINCE.map((exp, index) => (
+        <Item key={index} {...exp} />
       ))}
+      <a
+        href="https://google.com"
+        target="_blank"
+        className={buttonVariants({ variant: 'link', className: 'px-0!' })}
+      >
+        View full resume
+        <ExternalLinkIcon className="size-4" />
+      </a>
     </div>
   )
 }
