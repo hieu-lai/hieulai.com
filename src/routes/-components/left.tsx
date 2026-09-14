@@ -11,10 +11,7 @@ export function Left() {
   return (
     <div className="pointer-events-none sticky top-0 z-10 flex h-dvh flex-1 shrink-0 flex-col justify-between py-20">
       <div className="space-y-4">
-        <div className="flex items-center justify-between pr-20">
-          <h1 className="text-4xl font-bold">Hieu Lai</h1>
-          <ModeToggle />
-        </div>
+        <h1 className="text-4xl font-bold">Hieu Lai</h1>
         <p className="text-lg font-medium">
           Full-Stack Developer{' '}
           <span className="text-muted-foreground text-sm font-normal">
@@ -25,6 +22,7 @@ export function Left() {
           I love building accessible, pixel-perfect web experiences and
           simplifying complex problems into thoughtful solutions.
         </p>
+        <ModeToggle />
       </div>
       <div className="flex gap-4">
         <Tooltip>
