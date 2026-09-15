@@ -45,8 +45,9 @@ export function Experience() {
         <Item key={index} {...exp} />
       ))}
       <a
-        href="https://google.com"
+        href="/resume.pdf"
         target="_blank"
+        rel="noopener noreferrer"
         className={buttonVariants({ variant: 'link', className: 'px-0!' })}
       >
         View full resume
