@@ -16,6 +16,13 @@ const config = defineConfig({
     rsc(),
     viteReact(),
   ],
+  optimizeDeps: {
+    exclude: ['@base-ui/react', '@base-ui/utils', 'lucide-react'],
+    include: [
+      '@base-ui/react > use-sync-external-store/shim',
+      '@base-ui/react > use-sync-external-store/shim/with-selector',
+    ],
+  },
 })
 
 export default config
