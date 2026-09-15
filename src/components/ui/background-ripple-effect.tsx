@@ -9,10 +9,12 @@ export const BackgroundRippleEffect = ({
   rows = 10,
   cols = 27,
   cellSize = 56,
+  className,
 }: {
   rows?: number
   cols?: number
   cellSize?: number
+  className?: string
 }) => {
   const [ripples, setRipples] = useState<Ripple[]>([])
   const nextRippleId = useRef(0)
@@ -39,6 +41,7 @@ export const BackgroundRippleEffect = ({
         'fixed inset-0 h-full w-full',
         '[--cell-border-color:var(--color-neutral-300)] [--cell-fill-color:var(--color-neutral-100)] [--cell-shadow-color:var(--color-neutral-500)]',
         'dark:[--cell-border-color:var(--color-neutral-700)] dark:[--cell-fill-color:var(--color-neutral-900)] dark:[--cell-shadow-color:var(--color-neutral-800)]',
+        className,
       )}
     >
       <div className="relative h-auto w-auto overflow-hidden [mask-image:linear-gradient(to_bottom,black_50%,transparent_100%)]">

@@ -1,4 +1,5 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
+import { NotFound } from '#/components/not-found'
 import { ThemeProvider } from '#/components/theme-provider'
 import { TooltipProvider } from '#/components/ui/tooltip'
 
@@ -30,6 +31,7 @@ export const Route = createRootRoute({
     ],
   }),
   shellComponent: RootDocument,
+  notFoundComponent: NotFound,
 })
 
 function RootDocument({ children }: { children: React.ReactNode }) {
