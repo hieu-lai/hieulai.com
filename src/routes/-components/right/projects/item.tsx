@@ -15,7 +15,7 @@ export function Item({ description, tech, title, imageKey, link }: Props) {
       <img
         src={`/images/${imageKey}`}
         alt={`${title} preview`}
-        className="aspect-video w-32 self-start rounded-lg border"
+        className="aspect-video w-24 self-start rounded-lg border md:w-32"
       />
       <div className="-mt-0.75 flex flex-col gap-2">
         <div className="flex items-center gap-2">
