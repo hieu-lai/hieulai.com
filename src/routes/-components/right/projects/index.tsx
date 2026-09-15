@@ -3,7 +3,7 @@ import { Item } from './item'
 const PROJECTS = [
   {
     imageKey: 'waltz.png',
-    title: 'AI Chat Application',
+    title: 'AI Chat',
     link: 'https://waltz-five.vercel.app/',
     description:
       'Built with TypeScript, React, and Convex, featuring streamed responses, generation recovery, persistent drafts, authenticated conversation history, feedback, and chat organization.',
