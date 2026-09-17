@@ -2,7 +2,7 @@ export function About() {
   return (
     <div>
       <p>
-        Yo, I’m Hieu, and I like building things. I’m a full-stack developer
+        Hey, I’m Hieu, and I like building things. I’m a full-stack developer
         with a strong frontend focus, specialising in React and TypeScript. Much
         of my work is about making interfaces feel polished and accessible, and
         making complex problems simpler for the people using the product and the
