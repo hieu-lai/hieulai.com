@@ -28,8 +28,9 @@ export function About() {
       </p>
       <br />
       <p>
-        Outside of work, I’m usually at the gym, playing pickleball, or
-        convincing myself that a run is a good idea.
+        When I’m not coding, you’ll usually find me at the gym, playing
+        pickleball, or convincing myself halfway through a run that this was
+        somehow a good idea.
       </p>
     </div>
   )
